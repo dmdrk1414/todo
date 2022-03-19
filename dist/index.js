@@ -117,179 +117,74 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/clock.js":[function(require,module,exports) {
-var clock = document.querySelector("h2#clock");
+})({"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-function getClock() {
-  var getHours = String(new Date().getHours()).padStart(2, "0");
-  var getMinutes = String(new Date().getMinutes()).padStart(2, "0");
-  var getSeconds = String(new Date().getSeconds()).padStart(2, "0");
-  clock.innerHTML = "".concat(getHours, " \uC2DC \n  ").concat(getMinutes, " \uBD84 \n  ").concat(getSeconds, "\uCD08");
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
 }
 
-setInterval(getClock, 1000);
-},{}],"js/greetings.js":[function(require,module,exports) {
-var loginForm = document.querySelector("#login-form");
-var loginInput = document.querySelector("#login-form input");
-var greeting = document.querySelector("#greeting");
-var STORAGE_KEY = "username";
-var HIDDEN_CLASSNAME = "hidden";
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
 
-function onLoginSubmit(event) {
-  event.preventDefault();
-  var username = loginInput.value;
-  localStorage.setItem(STORAGE_KEY, username);
-  loginForm.classList.add(HIDDEN_CLASSNAME);
-  paintGreetings();
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
 }
 
-function paintGreetings() {
-  var username = localStorage.getItem(STORAGE_KEY);
-  greeting.classList.add("greeting");
-  greeting.innerHTML = "Hello ".concat(username);
-  greeting.classList.remove(HIDDEN_CLASSNAME);
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
 }
 
-if (localStorage.getItem(STORAGE_KEY) === null) {
-  loginForm.classList.remove(HIDDEN_CLASSNAME);
-  loginForm.addEventListener("submit", onLoginSubmit);
-} else {
-  paintGreetings();
-}
-},{}],"js/quotes.js":[function(require,module,exports) {
-var quotes = [{
-  quote: "나 자신에 대한 자신감을 잃으면 온 세상이 나의 적이 된다.",
-  author: "랄프 왈도 에머슨"
-}, {
-  quote: "항상 맑으면 사막이 된다. 비가 내리고 바람이 불어야만 비옥한 땅이 된다.",
-  author: "스페인 속담"
-}, {
-  quote: "인생에서 가장 슬픈 세 가지. 할 수 있었는데, 해야 했는데, 해야만 했는데.",
-  author: "루이스 E. 분"
-}, {
-  quote: "같은 실수를 두려워하되 새로운 실수를 두려워하지 마라. 실수는 곧 경험이다.",
-  author: "도서 ‘어떤 하루’ 中"
-}, {
-  quote: "오늘은 당신의 남은 인생 중, 첫 번째 날이다.",
-  author: "영화 ‘아메리칸 뷰티’ 中"
-}, {
-  quote: "인생은 곱셈이다. 어떤 기회가 와도 내가 제로면 아무런 의미가 없다.",
-  author: "나카무라 미츠루"
-}, {
-  quote: "별은 바라보는 자에게 빛을 준다.",
-  author: "도서 ‘드래곤 라자’ 中"
-}, {
-  quote: "생명이 있는 한 희망이 있다. 실망을 친구로 삼을 것인가, 아니면 희망을 친구로 삼을 것인가.",
-  author: "J.위트"
-}, {
-  quote: "실패란 넘어지는 것이 아니라, 넘어진 자리에 머무는 것이다.",
-  author: "도서 ‘프린세스, 라 브라바!’ 中"
-}];
-var quote = document.querySelector("#quote span:first-child");
-var author = document.querySelector("#quote span:last-child");
-var ramdomNumber = Math.floor(Math.random() * quotes.length);
-var todaysQuote = quotes[ramdomNumber];
-quote.innerHTML = todaysQuote.quote;
-author.innerHTML = "- ".concat(todaysQuote.author, " -");
-},{}],"js/todo.js":[function(require,module,exports) {
-var toDoForm = document.getElementById("todo-form");
-var toDoList = document.getElementById("todo-list");
-var toDoInput = document.querySelector("#todo-form input");
-var TODOS_KEY = "todos";
-var toDos = [];
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
 
-function savedToDos() {
-  localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
-}
+function updateLink(link) {
+  var newLink = link.cloneNode();
 
-function deleteToDo(event) {
-  var li = event.target.parentElement;
-  li.remove();
-  var li_ID = li.id;
-  toDos = toDos.filter(function (toDo) {
-    return toDo.id !== parseInt(li_ID);
-  });
-  savedToDos();
-}
-
-function paintToDo(newTodo) {
-  var li = document.createElement("li");
-  li.id = newTodo.id;
-  li.classList.add("todo_li");
-  var span = document.createElement("span");
-  span.innerText = newTodo.text;
-  span.classList.add("todo_span");
-  var div = document.createElement("div");
-  div.classList.add("todo-list_button");
-  var button = document.createElement("button");
-  button.classList.add("todolist_delete_button");
-  button.addEventListener("click", deleteToDo);
-  button.innerText = "❌";
-  li.appendChild(span);
-  li.appendChild(button);
-  toDoList.appendChild(li);
-}
-
-function handleToDoSubmit(event) {
-  event.preventDefault();
-  var newTodo = toDoInput.value;
-  toDoInput.value = "";
-  var newTodoObj = {
-    text: newTodo,
-    id: Date.now()
+  newLink.onload = function () {
+    link.remove();
   };
-  toDos.push(newTodoObj);
-  paintToDo(newTodoObj);
-  savedToDos();
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
 }
 
-toDoForm.addEventListener("submit", handleToDoSubmit);
-var savedToDoss = localStorage.getItem(TODOS_KEY);
+var cssTimeout = null;
 
-if (savedToDoss !== null) {
-  var parseToDos = JSON.parse(savedToDoss); // localStorage에 받은것들을 배열로 저장
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
 
-  toDos = parseToDos;
-  parseToDos.forEach(paintToDo); // parseToDos 의 배열 원소들 하나하나 함수로 받기 가능 / paintToDo의 매개변수로 원소들이 들어간다.
-  // paintToDo({text: "a", id:12121212})
-}
-},{}],"js/weather.js":[function(require,module,exports) {
-var API_KEY = "15f1bcbbaf67df2baa68485eb095fa9f";
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
 
-function onGeoOk(position) {
-  var lat = position.coords.latitude;
-  var lon = position.coords.longitude; // console.log(`You live it latitude : ${lat} , longitude : ${lon}`);
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
 
-  var url = "https://api.openweathermap.org/data/2.5/weather?lat=".concat(lat, "&lon=").concat(lon, "&appid=").concat(API_KEY, "&units=metric");
-  fetch(url) //
-  .then(function (response) {
-    return response.json();
-  }).then(function (data) {
-    var city = document.querySelector("#weather span:last-child");
-    var weather = document.querySelector("#weather span:first-child"); // city.innerHTML = `${data.name}`;
-
-    weather.innerHTML = "\uC624\uB298\uC758 \uB0A0\uC528\uB294 ".concat(data.weather[0].main, " / ").concat(data.main.temp, " \uB3C4 ");
-  });
+    cssTimeout = null;
+  }, 50);
 }
 
-function onGeoError() {
-  alert("날씨못찾겠어");
-}
-
-navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
-},{}],"js/main.js":[function(require,module,exports) {
-"use strict";
-
-require("./clock");
-
-require("./greetings");
-
-require("./quotes");
-
-require("./todo");
-
-require("./weather");
-},{"./clock":"js/clock.js","./greetings":"js/greetings.js","./quotes":"js/quotes.js","./todo":"js/todo.js","./weather":"js/weather.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+module.exports = reloadCSS;
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -317,7 +212,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38565" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46247" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -493,5 +388,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/main.js"], null)
-//# sourceMappingURL=/main.fb6bbcaf.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/index.js.map

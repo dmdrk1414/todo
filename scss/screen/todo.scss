@@ -1,5 +1,24 @@
-.todolist_delete_button {
-  width: 18px;
-  height: 15px;
-  font-size: 10px;
+.todo-form {
+  margin-top: 10px;
+  .todo-form_input {
+    width: 40%;
+    height: 30px;
+  }
+}
+
+.todo_li {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: 10px 0px 10px;
+  border-bottom: 1px solid rgba($color: #999797, $alpha: 0.5);
+
+  .todo_span {
+    margin-right: 50px;
+    font-family: "Do Hyeon", sans-serif;
+    font-size: 20px;
+  }
+  .todolist_delete_button {
+    font-size: 10px;
+  }
 }

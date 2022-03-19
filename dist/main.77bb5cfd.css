@@ -2,6 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
 html,
 body,
 div,
@@ -133,8 +134,68 @@ table {
   border-spacing: 0;
 }
 
+.greeting_container {
+  display: flex;
+  justify-content: center;
+}
+.greeting_container .greeting {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "Do Hyeon", sans-serif;
+}
+
+.quote-container {
+  font-family: sans-serif;
+  font-weight: bold;
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+}
+.quote-container .quote_write {
+  font-size: 5px;
+}
+
+.todo-form {
+  margin-top: 10px;
+}
+.todo-form .todo-form_input {
+  width: 40%;
+  height: 30px;
+}
+
+.todo_li {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: 10px 0px 10px;
+  border-bottom: 1px solid rgba(153, 151, 151, 0.5);
+}
+.todo_li .todo_span {
+  margin-right: 50px;
+  font-family: "Do Hyeon", sans-serif;
+  font-size: 20px;
+}
+.todo_li .todolist_delete_button {
+  font-size: 10px;
+}
+
+.clock-weather_container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+}
+.clock-weather_container .clock {
+  font-family: "Do Hyeon", sans-serif;
+}
+.clock-weather_container .weather_container {
+  font-family: "Do Hyeon", sans-serif;
+}
+
 body {
   background-color: beige;
+  margin: 10px;
+  height: 200vh;
 }
 
 h1 {

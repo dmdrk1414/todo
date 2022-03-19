@@ -44,12 +44,6 @@ const quotes = [
     quote: "실패란 넘어지는 것이 아니라, 넘어진 자리에 머무는 것이다.",
     author: "도서 ‘프린세스, 라 브라바!’ 中",
   },
-
-  {
-    quote:
-      "슬픔이 그대의 삶으로 밀려와 마음을 흔들고 소중한 것을 쓸어가 버릴 때면 그대 가슴에 대고 말하라. “이것 또한 지나가리라”",
-    author: "랜터 윌슨 스미스",
-  },
 ];
 
 const quote = document.querySelector("#quote span:first-child");
@@ -59,4 +53,4 @@ const ramdomNumber = Math.floor(Math.random() * quotes.length);
 const todaysQuote = quotes[ramdomNumber];
 
 quote.innerHTML = todaysQuote.quote;
-author.innerHTML = todaysQuote.author;
+author.innerHTML = `- ${todaysQuote.author} -`;

@@ -17,17 +17,28 @@
       />
       <input type="submit" value="Log In" />
     </form>
-    <h2 id="clock">00:00</h2>
-    <h1 class="hidden" id="greeting"></h1>
-    <form id="todo-form">
-      <input type="text" placeholder="Write a To Do and Press Enter" required />
+    <div class="clock-weather_container">
+      <div id="weather" class="weather_container">
+        <span></span><span></span>
+      </div>
+      <h2 id="clock" class="clock">00:00</h2>
+    </div>
+    <div class="greeting_container">
+      <h1 class="hidden" id="greeting"></h1>
+    </div>
+    <form id="todo-form" class="todo-form">
+      <input
+        type="text"
+        class="todo-form_input"
+        placeholder="오늘 해야할 일을 적으세요!"
+        required
+      />
     </form>
     <ul id="todo-list"></ul>
-    <div class="" id="quote">
-      <span></span>
-      <span></span>
+    <div class="quote-container" id="quote">
+      <span class="quote_content"></span>
+      <span class="quote_write"></span>
     </div>
-    <div id="weather"><span></span><span></span></div>
     <script src="./js/main.js"></script>
   </body>
 </html>

@@ -1,0 +1,12 @@
+.clock-weather_container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  .clock {
+    font-family: "Do Hyeon", sans-serif;
+  }
+  .weather_container {
+    font-family: "Do Hyeon", sans-serif;
+  }
+}
