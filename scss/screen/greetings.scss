@@ -1,0 +1,9 @@
+.greeting_container {
+  display: flex;
+  justify-content: center;
+  .greeting {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Do Hyeon", sans-serif;
+  }
+}

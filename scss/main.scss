@@ -1,8 +1,15 @@
 // reset.scss
 @import "./reset.scss";
+@import "./screen/greetings.scss";
+@import "./screen/todo.scss";
+
+// font
+// font-family: 'Do Hyeon', sans-serif; clock.js
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
 
 body {
   background-color: beige;
+  margin: 10px;
 }
 
 h1 {
