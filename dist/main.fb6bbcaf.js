@@ -131,31 +131,42 @@ setInterval(getClock, 1000);
 },{}],"js/greetings.js":[function(require,module,exports) {
 var loginForm = document.querySelector("#login-form");
 var loginInput = document.querySelector("#login-form input");
+var loginDelete_Form = document.querySelector(".user-delete-container ");
+var loginDelete_button = document.querySelector(".user-delete-container .user-delete-button");
 var greeting = document.querySelector("#greeting");
-var STORAGE_KEY = "username";
+var USER_STORAGE_KEY = "username";
 var HIDDEN_CLASSNAME = "hidden";
 
 function onLoginSubmit(event) {
-  event.preventDefault();
   var username = loginInput.value;
-  localStorage.setItem(STORAGE_KEY, username);
+  localStorage.setItem(USER_STORAGE_KEY, username);
   loginForm.classList.add(HIDDEN_CLASSNAME);
   paintGreetings();
 }
 
 function paintGreetings() {
-  var username = localStorage.getItem(STORAGE_KEY);
+  var username = localStorage.getItem(USER_STORAGE_KEY);
   greeting.classList.add("greeting");
   greeting.innerHTML = "Hello ".concat(username);
   greeting.classList.remove(HIDDEN_CLASSNAME);
 }
 
-if (localStorage.getItem(STORAGE_KEY) === null) {
+if (localStorage.getItem(USER_STORAGE_KEY) === null) {
   loginForm.classList.remove(HIDDEN_CLASSNAME);
   loginForm.addEventListener("submit", onLoginSubmit);
 } else {
   paintGreetings();
 }
+
+if (localStorage.getItem(USER_STORAGE_KEY) !== null) {
+  loginDelete_Form.classList.remove(HIDDEN_CLASSNAME);
+}
+
+function userDeleteHandler(event) {
+  localStorage.removeItem(USER_STORAGE_KEY);
+}
+
+loginDelete_Form.addEventListener("submit", userDeleteHandler);
 },{}],"js/quotes.js":[function(require,module,exports) {
 var quotes = [{
   quote: "나 자신에 대한 자신감을 잃으면 온 세상이 나의 적이 된다.",
@@ -317,7 +328,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38565" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40553" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

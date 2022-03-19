@@ -137,6 +137,8 @@ table {
 .greeting_container {
   display: flex;
   justify-content: center;
+  position: relative;
+  top: -30px;
 }
 .greeting_container .greeting {
   font-size: 30px;

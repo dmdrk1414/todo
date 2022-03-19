@@ -1,9 +1,15 @@
 .greeting_container {
   display: flex;
   justify-content: center;
+  position: relative;
+  top: -30px;
   .greeting {
     font-size: 30px;
     font-weight: bold;
     font-family: "Do Hyeon", sans-serif;
+  }
+}
+.user-delete-container {
+  .user-delete-button {
   }
 }
