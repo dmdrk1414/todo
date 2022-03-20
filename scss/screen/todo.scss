@@ -1,15 +1,18 @@
-.todo-form {
-  margin-top: 10px;
-  .todo-form_input {
-    width: 40%;
-    height: 30px;
+.todo-container {
+  width: 50%;
+  .todo-form {
+    margin-top: 10px;
+    .todo-form_input {
+      width: 40%;
+      height: 30px;
+    }
   }
 }
 
 .todo_li {
   display: flex;
   justify-content: space-between;
-  width: 50%;
+  width: 90%;
   margin: 10px 0px 10px;
   border-bottom: 1px solid rgba($color: #999797, $alpha: 0.5);
 

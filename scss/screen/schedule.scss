@@ -1,0 +1,62 @@
+$barSize: 0.5px;
+$ScheduleDivSize: 10.8%;
+.main-right {
+  width: 50%;
+}
+.schedule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: tomato;
+  width: 90%;
+  height: 640px;
+  padding: 10px;
+  border-radius: 15px;
+  .schedule-container {
+    background-color: brown;
+    width: 90%;
+    height: 90%;
+    border-radius: 10px;
+
+    .schedule-time-check-container {
+      position: absolute;
+      top: 60px;
+      left: 1px;
+      div {
+        font-weight: bold;
+        height: 62px;
+      }
+    }
+
+    .day-name-container {
+      display: flex;
+      justify-content: center;
+      background-color: aliceblue;
+
+      div {
+        display: flex;
+        justify-content: center;
+        width: 20%;
+        border-right: $barSize solid rgba($color: #000000, $alpha: 0.5);
+        border-left: $barSize solid rgba($color: #000000, $alpha: 0.5);
+      }
+    }
+
+    .schedule-main-container {
+      height: 100%;
+      .scheduleDiv_container {
+        display: flex;
+        height: $ScheduleDivSize;
+        div {
+          display: flex;
+          justify-content: center;
+          width: 20%;
+          border: $barSize solid rgba($color: #000000, $alpha: 0.2);
+
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}

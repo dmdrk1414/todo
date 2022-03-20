@@ -157,10 +157,13 @@ table {
   font-size: 5px;
 }
 
-.todo-form {
+.todo-container {
+  width: 50%;
+}
+.todo-container .todo-form {
   margin-top: 10px;
 }
-.todo-form .todo-form_input {
+.todo-container .todo-form .todo-form_input {
   width: 40%;
   height: 30px;
 }
@@ -168,7 +171,7 @@ table {
 .todo_li {
   display: flex;
   justify-content: space-between;
-  width: 50%;
+  width: 90%;
   margin: 10px 0px 10px;
   border-bottom: 1px solid rgba(153, 151, 151, 0.5);
 }
@@ -189,9 +192,71 @@ table {
 }
 .clock-weather_container .clock {
   font-family: "Do Hyeon", sans-serif;
+  font-size: 20p;
 }
 .clock-weather_container .weather_container {
   font-family: "Do Hyeon", sans-serif;
+}
+
+.main-right {
+  width: 50%;
+}
+
+.schedule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: tomato;
+  width: 90%;
+  height: 640px;
+  padding: 10px;
+  border-radius: 15px;
+}
+.schedule .schedule-container {
+  background-color: brown;
+  width: 90%;
+  height: 90%;
+  border-radius: 10px;
+}
+.schedule .schedule-container .schedule-time-check-container {
+  position: absolute;
+  top: 60px;
+  left: 1px;
+}
+.schedule .schedule-container .schedule-time-check-container div {
+  font-weight: bold;
+  height: 62px;
+}
+.schedule .schedule-container .day-name-container {
+  display: flex;
+  justify-content: center;
+  background-color: aliceblue;
+}
+.schedule .schedule-container .day-name-container div {
+  display: flex;
+  justify-content: center;
+  width: 20%;
+  border-right: 0.5px solid rgba(0, 0, 0, 0.5);
+  border-left: 0.5px solid rgba(0, 0, 0, 0.5);
+}
+.schedule .schedule-container .schedule-main-container {
+  height: 100%;
+}
+.schedule .schedule-container .schedule-main-container .scheduleDiv_container {
+  display: flex;
+  height: 10.8%;
+}
+.schedule .schedule-container .schedule-main-container .scheduleDiv_container div {
+  display: flex;
+  justify-content: center;
+  width: 20%;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  font-size: 24px;
+}
+
+.body-main-container {
+  display: flex;
 }
 
 body {

@@ -21,10 +21,32 @@
     <div class="greeting_container">
       <h1 class="hidden" id="greeting"></h1>
     </div>
-    <form id="todo-form" class="todo-form">
-      <input type="text" class="todo-form_input" placeholder="오늘 해야할 일을 적으세요!" required="">
-    </form>
-    <ul id="todo-list"></ul>
+    <div class="body-main-container">
+      <div class="todo-container">
+        <form id="todo-form" class="todo-form">
+          <input type="text" class="todo-form_input" placeholder="오늘 해야할 일을 적으세요!" required="">
+        </form>
+        <ul id="todo-list"></ul>
+      </div>
+      <div class="main-right">
+        <div class="schedule">
+          <div class="schedule-container">
+            <div class="day-name-container"></div>
+            <div class="schedule-main-container"></div>
+            <div class="schedule-time-check-container"></div>
+          </div>
+        </div>
+        <form id="subForm">
+          <select name="job" id="daySelect">
+            <option value="">요일선택</option>
+          </select>
+          <select name="job" id="timeSelect">
+            <option value="">시간선택</option>
+          </select>
+          <input type="text" placeholder="과목이름을 적으세요 엔터">
+        </form>
+      </div>
+    </div>
     <div class="quote-container" id="quote">
       <span class="quote_content"></span>
       <span class="quote_write"></span>

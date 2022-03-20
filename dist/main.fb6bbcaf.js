@@ -288,6 +288,109 @@ function onGeoError() {
 }
 
 navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
+},{}],"js/schedule.js":[function(require,module,exports) {
+var dayName = document.querySelector(".day-name-container");
+var scheduleContainer = document.querySelector(".schedule-main-container");
+var SUBJECT_ID = "subject"; // 요일 스케줄위에함수
+
+var dayArr = ["월", "화", "수", "목", "금"];
+
+function dayNameFunc() {
+  for (var i = 0; i < 5; i++) {
+    var div = document.createElement("div");
+    div.classList.add("dayitem_".concat(dayArr[i]));
+    dayName.appendChild(div);
+    div.innerHTML = "".concat(dayArr[i]);
+  }
+}
+
+var timeCheckContainer = document.querySelector(".schedule-time-check-container"); // 시간표옆에 시간체크
+
+function timeCheckFunc() {
+  for (var i = 1; i <= 9; i++) {
+    var div = document.createElement("div");
+    div.innerHTML = "".concat(i, "\uC2DC");
+    timeCheckContainer.appendChild(div);
+  }
+} // schedule 표 만들기 div
+
+
+function scheduleFunc() {
+  for (var i = 1; i <= 9; i++) {
+    var div = document.createElement("div");
+    div.classList.add("scheduleDiv_container_".concat(i));
+    div.classList.add("scheduleDiv_container");
+    scheduleContainer.appendChild(div);
+    var divContainer = document.querySelector(".scheduleDiv_container_".concat(i));
+
+    for (var j = 1; j <= 5; j++) {
+      var _div = document.createElement("div");
+
+      divContainer.appendChild(_div);
+      _div.innerHTML = "test";
+    }
+  }
+} // select DayOption
+
+
+var daySelect = document.querySelector("#daySelect");
+
+function makeDayOption() {
+  for (var i = 0; i < 5; i++) {
+    var option = document.createElement("option");
+    option.value = "".concat(dayArr[i], "\uC694\uC77C");
+    option.innerHTML = "".concat(dayArr[i], "\uC694\uC77C");
+    daySelect.appendChild(option);
+  }
+} // select timeOption
+
+
+var timeSelect = document.querySelector("#timeSelect");
+
+function makeOption() {
+  for (var i = 1; i <= 9; i++) {
+    var option = document.createElement("option");
+    option.value = "".concat(i, "\uC2DC");
+    option.innerHTML = "".concat(i, "\uC2DC");
+    timeSelect.appendChild(option);
+  }
+} // input 과목이름 엔터 submit 처리
+
+
+var subForm = document.querySelector("#subForm");
+var subInput = document.querySelector("#subForm input");
+var subjectArr = [];
+
+function handleSubFormSubmit(event) {
+  event.preventDefault();
+  var tempObject = {
+    day: daySelect.value,
+    time: timeSelect.value,
+    value: subInput.value
+  };
+  subjectArr.push(tempObject);
+  localStorage.setItem(SUBJECT_ID, JSON.stringify(subjectArr)); // 저장
+} // 로컬호스트에 저장시 string타입으로
+
+
+var saveSchedule = localStorage.getItem(SUBJECT_ID);
+
+if (saveSchedule !== null) {
+  var parseSubject = JSON.parse(saveSchedule);
+  subjectArr = parseSubject;
+}
+
+subForm.addEventListener("submit", handleSubFormSubmit); // call 함수
+
+function scheduleCall() {
+  timeCheckFunc();
+  dayNameFunc();
+  scheduleFunc();
+  makeDayOption();
+  makeOption();
+}
+
+scheduleCall();
 },{}],"js/main.js":[function(require,module,exports) {
 "use strict";
 
@@ -300,7 +403,9 @@ require("./quotes");
 require("./todo");
 
 require("./weather");
-},{"./clock":"js/clock.js","./greetings":"js/greetings.js","./quotes":"js/quotes.js","./todo":"js/todo.js","./weather":"js/weather.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+require("./schedule");
+},{"./clock":"js/clock.js","./greetings":"js/greetings.js","./quotes":"js/quotes.js","./todo":"js/todo.js","./weather":"js/weather.js","./schedule":"js/schedule.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -328,7 +433,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40553" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38717" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

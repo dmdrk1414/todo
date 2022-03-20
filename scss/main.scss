@@ -4,13 +4,18 @@
 @import "./screen/quote.scss";
 @import "./screen/todo.scss";
 @import "./screen/clock_wheather.scss";
+@import "./screen/schedule.scss";
 
-// font
+// @import "../node_modules/bootstrap/scss/bootstrap.scss";
+
 // font-family: 'Do Hyeon', sans-serif; clock.js
 @import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
 //  todolist  font-family: 'Do Hyeon', sans-serif;
 //  명언 font-family: 'Do Hyeon', sans-serif;
 
+.body-main-container {
+  display: flex;
+}
 body {
   background-color: beige;
   margin: 10px;
