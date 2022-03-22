@@ -36,8 +36,31 @@ function scheduleFunc() {
 
     for (let j = 1; j <= 5; j++) {
       const div = document.createElement("div");
+      div.id = `${dayArr[j - 1]}요일_${i}시`;
       divContainer.appendChild(div);
-      div.innerHTML = "test";
+
+      let IdArr = [];
+      const getDivId = div.id;
+      let sliceGetId = getDivId.slice(0, 3);
+      IdArr.push(sliceGetId);
+      sliceGetId = getDivId.slice(4, 6);
+      IdArr.push(sliceGetId);
+
+      const dayStorage = localStorage.getItem(IdArr[0]);
+      const hourStorage = localStorage.getItem(IdArr[1]);
+
+      const saveLocal = localStorage.getItem(SUBJECT_ID);
+      const parseSaveLocal = JSON.parse(saveLocal);
+      let arrSaveLocal = Object.entries(parseSaveLocal);
+      arrSaveLocal = arrSaveLocal.map((each) => ({
+        day: each[1].day,
+        hour: each[1].time,
+        value: each[1].value,
+      }));
+      console.log(arrSaveLocal);
+      console.log(arrSaveLocal.find((e) => e.day === dayStorage));
+
+      div.innerHTML = `test`;
     }
   }
 }
@@ -77,9 +100,12 @@ function handleSubFormSubmit(event) {
   };
   subjectArr.push(tempObject);
   localStorage.setItem(SUBJECT_ID, JSON.stringify(subjectArr)); // 저장
+  console.log(subjectArr);
 }
 // 로컬호스트에 저장시 string타입으로
 const saveSchedule = localStorage.getItem(SUBJECT_ID);
+
+// subjectArr 는 시작할때 항상 처음으로 정해져있다. 그래서 스토리지에 있는걸 배열에 넣는다.
 if (saveSchedule !== null) {
   const parseSubject = JSON.parse(saveSchedule);
   subjectArr = parseSubject;

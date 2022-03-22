@@ -323,11 +323,37 @@ function scheduleFunc() {
     scheduleContainer.appendChild(div);
     var divContainer = document.querySelector(".scheduleDiv_container_".concat(i));
 
-    for (var j = 1; j <= 5; j++) {
-      var _div = document.createElement("div");
+    var _loop = function _loop(j) {
+      var div = document.createElement("div");
+      div.id = "".concat(dayArr[j - 1], "\uC694\uC77C_").concat(i, "\uC2DC");
+      divContainer.appendChild(div);
+      var IdArr = [];
+      var getDivId = div.id;
+      var sliceGetId = getDivId.slice(0, 3);
+      IdArr.push(sliceGetId);
+      sliceGetId = getDivId.slice(4, 6);
+      IdArr.push(sliceGetId);
+      var dayStorage = localStorage.getItem(IdArr[0]);
+      var hourStorage = localStorage.getItem(IdArr[1]);
+      var saveLocal = localStorage.getItem(SUBJECT_ID);
+      var parseSaveLocal = JSON.parse(saveLocal);
+      var arrSaveLocal = Object.entries(parseSaveLocal);
+      arrSaveLocal = arrSaveLocal.map(function (each) {
+        return {
+          day: each[1].day,
+          hour: each[1].time,
+          value: each[1].value
+        };
+      });
+      console.log(arrSaveLocal);
+      console.log(arrSaveLocal.find(function (e) {
+        return e.day === dayStorage;
+      }));
+      div.innerHTML = "test";
+    };
 
-      divContainer.appendChild(_div);
-      _div.innerHTML = "test";
+    for (var j = 1; j <= 5; j++) {
+      _loop(j);
     }
   }
 } // select DayOption
@@ -370,10 +396,12 @@ function handleSubFormSubmit(event) {
   };
   subjectArr.push(tempObject);
   localStorage.setItem(SUBJECT_ID, JSON.stringify(subjectArr)); // 저장
+
+  console.log(subjectArr);
 } // 로컬호스트에 저장시 string타입으로
 
 
-var saveSchedule = localStorage.getItem(SUBJECT_ID);
+var saveSchedule = localStorage.getItem(SUBJECT_ID); // subjectArr 는 시작할때 항상 처음으로 정해져있다. 그래서 스토리지에 있는걸 배열에 넣는다.
 
 if (saveSchedule !== null) {
   var parseSubject = JSON.parse(saveSchedule);
@@ -433,7 +461,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38717" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42391" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
