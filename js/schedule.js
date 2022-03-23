@@ -39,27 +39,32 @@ function scheduleFunc() {
       div.id = `${dayArr[j - 1]}요일_${i}시`;
       divContainer.appendChild(div);
 
-      let IdArr = [];
+      let IdArr = []; // Id을 day와 hour로 배열분리
       const getDivId = div.id;
       let sliceGetId = getDivId.slice(0, 3);
       IdArr.push(sliceGetId);
       sliceGetId = getDivId.slice(4, 6);
       IdArr.push(sliceGetId);
+      const IdDay = IdArr[0]; // div 의 Id을 Day로 만든 변수
+      const IdHour = IdArr[1]; // div 의 Id을 Hour로 만든 변수
 
-      const dayStorage = localStorage.getItem(IdArr[0]);
-      const hourStorage = localStorage.getItem(IdArr[1]);
+      const dayStorage = localStorage.getItem(IdArr[0]); // day 기준으로 storyage을 가져온것
+      const hourStorage = localStorage.getItem(IdArr[1]); // hour 기준으로 storyage을 가져온것
 
-      const saveLocal = localStorage.getItem(SUBJECT_ID);
-      const parseSaveLocal = JSON.parse(saveLocal);
-      let arrSaveLocal = Object.entries(parseSaveLocal);
+      const saveLocal = localStorage.getItem(SUBJECT_ID); // storage을 KEY : subject 을 기준으로 value을 가져온 것
+      const parseSaveLocal = JSON.parse(saveLocal); // 객체로 변환한 saveLocal 값
+      let arrSaveLocal = Object.entries(parseSaveLocal); // parseSaveLocal 객체값을 배열로 만든 배열
       arrSaveLocal = arrSaveLocal.map((each) => ({
         day: each[1].day,
         hour: each[1].time,
         value: each[1].value,
       }));
       console.log(arrSaveLocal);
-      console.log(arrSaveLocal.find((e) => e.day === dayStorage));
-
+      console.log(
+        arrSaveLocal.find((e) => {
+          return e.day === IdDay && e.hour === IdHour;
+        })
+      );
       div.innerHTML = `test`;
     }
   }

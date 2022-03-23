@@ -327,17 +327,27 @@ function scheduleFunc() {
       var div = document.createElement("div");
       div.id = "".concat(dayArr[j - 1], "\uC694\uC77C_").concat(i, "\uC2DC");
       divContainer.appendChild(div);
-      var IdArr = [];
+      var IdArr = []; // Id을 day와 hour로 배열분리
+
       var getDivId = div.id;
       var sliceGetId = getDivId.slice(0, 3);
       IdArr.push(sliceGetId);
       sliceGetId = getDivId.slice(4, 6);
       IdArr.push(sliceGetId);
-      var dayStorage = localStorage.getItem(IdArr[0]);
-      var hourStorage = localStorage.getItem(IdArr[1]);
-      var saveLocal = localStorage.getItem(SUBJECT_ID);
-      var parseSaveLocal = JSON.parse(saveLocal);
-      var arrSaveLocal = Object.entries(parseSaveLocal);
+      var IdDay = IdArr[0]; // div 의 Id을 Day로 만든 변수
+
+      var IdHour = IdArr[1]; // div 의 Id을 Hour로 만든 변수
+
+      var dayStorage = localStorage.getItem(IdArr[0]); // day 기준으로 storyage을 가져온것
+
+      var hourStorage = localStorage.getItem(IdArr[1]); // hour 기준으로 storyage을 가져온것
+
+      var saveLocal = localStorage.getItem(SUBJECT_ID); // storage을 KEY : subject 을 기준으로 value을 가져온 것
+
+      var parseSaveLocal = JSON.parse(saveLocal); // 객체로 변환한 saveLocal 값
+
+      var arrSaveLocal = Object.entries(parseSaveLocal); // parseSaveLocal 객체값을 배열로 만든 배열
+
       arrSaveLocal = arrSaveLocal.map(function (each) {
         return {
           day: each[1].day,
@@ -347,7 +357,7 @@ function scheduleFunc() {
       });
       console.log(arrSaveLocal);
       console.log(arrSaveLocal.find(function (e) {
-        return e.day === dayStorage;
+        return e.day === IdDay && e.hour === IdHour;
       }));
       div.innerHTML = "test";
     };
@@ -461,7 +471,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42391" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35725" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
